@@ -1,0 +1,36 @@
+Complete UML Class Diagram Prompt
+Accurate class diagram for the Closet Cycle Java project
+Copy the prompt content below into Gemini. It is tailored to the current Closet Cycle student prototype; distinguish implemented behavior from proposed business ideas.
+
+PROMPT FOR GEMINI
+
+Create a complete, technically accurate UML 2.5 CLASS DIAGRAM for the current Closet Cycle Java/Spring Boot backend. Show the actual classes and interfaces listed below, their important fields, inheritance, implementations, associations, multiplicities, and dependency layers. This is a UML class diagram, not an ERD, flowchart, sequence diagram, or cloud architecture diagram. Produce ONE readable landscape diagram. If the content is too dense, use a two-panel landscape diagram on one page: (A) domain model and (B) application/service architecture, with a clear shared title and package labels. Do not omit core model classes or invent payment classes.
+
+PROJECT BOUNDARY AND NOTATION
+
+Project package root: com.closetcycle.api. Separate packages with UML package frames: model, dto, controller, service, repo, error, and config. Use standard UML notation: class rectangles with name / key attributes / a few important operations; <<interface>> and <<enumeration>> stereotypes; hollow triangle for inheritance/realization; solid associations with role labels and multiplicity; dashed dependency arrows for controller/service/repository use. Use + public and - private visibility. Avoid showing every getter/setter or framework-generated method. Arrange controller → service → repository dependencies in that direction.
+Show this crucial scope note on the diagram: “The Pro plan and UPI/card/net-banking checkout are front-end demonstration UI only. Demo activation is stored in browser localStorage. There is no payment controller, payment service, subscription entity, or real payment processing in the Java backend.” Do not invent any billing, subscription, Payment, Order, gateway, or Pro Java class.
+
+DOMAIN CLASSES: MODEL PACKAGE
+
+AuditedEntity is abstract and has id: Long, createdAt: Instant, updatedAt: Instant. UserAccount extends AuditedEntity and includes displayName, email, area, creditBalance, passwordHash, role: UserRole. ClothingItem extends AuditedEntity and includes title, description, category, size, conditionLabel, color, brand, creditValue, imageUrl, status: ItemStatus, owner: UserAccount. ExchangeRequest extends AuditedEntity and includes requester: UserAccount, owner: UserAccount, requestedItem: ClothingItem, offeredItem: ClothingItem (optional), type: ExchangeType, status: ExchangeStatus, creditDifference, requesterConfirmed, ownerConfirmed. CreditTransaction extends AuditedEntity and includes user: UserAccount, exchangeRequest: ExchangeRequest (optional), amount, description. MemberReport extends AuditedEntity and includes reporter: UserAccount, item: ClothingItem, reason, details, status.
+Enumerations: UserRole {MEMBER, MODERATOR}; ItemStatus {AVAILABLE, RESERVED, EXCHANGED, ARCHIVED}; ExchangeType {DIRECT_SWAP, CREDITS}; ExchangeStatus {REQUESTED, ACCEPTED, ARRANGED, COMPLETED, REJECTED, CANCELLED}. Show inheritance from AuditedEntity to all five entity classes. Show associations and multiplicities: one user owns zero-to-many ClothingItems; a user can be requester for zero-to-many ExchangeRequests and owner for zero-to-many ExchangeRequests; each exchange has one requester, one owner, one requested item, and zero or one offered item; one user has zero-to-many CreditTransactions; an exchange may be referenced by zero-to-many credit ledger entries; one user files zero-to-many MemberReports; one clothing item receives zero-to-many reports.
+
+DTO RECORDS: DTO PACKAGE
+
+Show ApiDtos as a <<record container>> or package containing CreateUser, Login, AuthView, UserView, UpdateProfile, CreateItem, ItemView, CreateExchange, ExchangeView, CreditView, CreateReport, and ReportView. Connect controller/API boundaries to DTOs with dependencies; connect response/view DTOs back to relevant model types only if there is space. Do not treat DTO records as JPA entities.
+
+CONTROLLERS AND SERVICES
+
+Controller classes: AuthController → AuthService; UserController → UserService; ClothingController → ClothingService; ExchangeController → ExchangeService; MemberReportController → MemberReportService; UploadController → ImageStorageService; MediaController → ImageStorageService. WalletController depends directly on UserRepository and CreditTransactionRepository. Preserve these actual dependency relationships.
+Service classes and dependencies: AuthService uses UserService, UserRepository, AuthenticationManager, and JwtEncoder. UserService uses UserRepository and PasswordEncoder. ClothingService uses ClothingItemRepository and UserService. ExchangeService uses ExchangeRepository, ClothingItemRepository, UserRepository, CreditTransactionRepository, and NotificationService. MemberReportService uses MemberReportRepository, UserService, and ClothingService. Show dependencies using dashed arrows, not ownership associations.
+
+REPOSITORIES, INTERFACES, EXCEPTIONS, AND CONFIGURATION
+
+Repository interfaces: UserRepository, ClothingItemRepository, ExchangeRepository, CreditTransactionRepository, and MemberReportRepository. Show them as <<interface>> Spring Data persistence abstractions. NotificationService is an interface implemented by AsyncNotificationService; note that notification delivery is asynchronous. ImageStorageService is an interface implemented by LocalFileStorageService and S3ImageStorageService.
+Show the custom runtime exceptions: InsufficientCreditsException, InvalidExchangeException, InvalidCredentialsException, InvalidUploadException, and ResourceNotFoundException; connect relevant services to the exceptions with dashed «throws» dependencies if the diagram remains readable. Optional supporting/configuration classes: ClosetCycleApiApplication, SecurityConfig, WebConfig, S3Config, AsyncConfig, DemoData, and ApiExceptionHandler. Put these in a small config/support package area; do not clutter the central domain classes.
+
+DIAGRAM LAYOUT, STYLING, AND FIDELITY
+
+Use a clear title “Closet Cycle — Java Backend UML Class Diagram”. Put entity/model classes in the center-left, enums nearby, DTOs below or in a dedicated panel, and controller → service → repository layers across the right side. Place the storage and notification interfaces with their implementations near services. Use restrained forest green, warm cream, charcoal, and muted sage. Make field names, arrowheads, and multiplicities readable when projected in class. Use orthogonal connectors and route lines around class boxes; avoid crossing lines and decorative clutter.
+Use only the stated classes and relationships or verify them from the source files if source is provided. Do not invent associations or falsely show that a payment service is implemented. Return a clean, complete diagram with all core classes legible; add a small legend for inheritance, implementation, association, and dependency. If supported, export an editable SVG/diagram source and a high-resolution PNG.

@@ -1,0 +1,29 @@
+Business Model Canvas Diagram Prompt
+One connected, arrow-based canvas for Closet Cycle
+Copy the prompt content below into Gemini. It is tailored to the current Closet Cycle student prototype; distinguish implemented behavior from proposed business ideas.
+
+PROMPT FOR GEMINI
+
+Create ONE complete, polished Business Model Canvas (BMC) diagram for Closet Cycle, a student-built campus clothing-exchange prototype. This must be a single integrated canvas diagram on one landscape page or one presentation slide. Do not create a multi-slide deck, separate cards, a Lean Canvas, a SWOT, or a PESTEL analysis.
+
+CANVAS LAYOUT AND ARROWS
+
+Use the standard 9-block Business Model Canvas arrangement: Key Partners on the far left; Key Activities above Key Resources to their right; Value Propositions in the center; Customer Relationships above Channels to the right; Customer Segments on the far right; and Cost Structure plus Revenue Streams as two wide blocks across the bottom. Label every block with its exact standard BMC heading.
+Connect the nine blocks with clear, directional arrows so the diagram reads as one business system. Keep connectors outside text areas and avoid arrow crossings. Use this flow: Key Partners → Key Activities → Value Propositions → Customer Relationships → Channels → Customer Segments. Also connect Key Resources → Key Activities and Key Resources → Value Propositions. Use separate dashed financial arrows from Customer Segments and campus sponsors toward Revenue Streams; use cost arrows from Key Partners, Key Activities, and Key Resources toward Cost Structure. Include a small legend that says solid arrows = service/value flow, dashed gold arrows = possible revenue, and muted rust arrows = costs. These arrows illustrate relationships; do not imply existing contracts or paid users.
+
+USE THIS CLOSET CYCLE CONTENT
+
+KEY PARTNERS: Potential campus sustainability clubs, student societies, a college sustainability office, an approved payment gateway provider for a future live launch, and hosting/storage vendors. Mark all partnerships “proposed; none confirmed.”
+KEY ACTIVITIES: Maintain the React/TypeScript website and Java 25 LTS/Spring Boot API; review listings and reports; support safe local handovers; build campus listing density; measure successful exchanges and user feedback; maintain privacy and security.
+KEY RESOURCES: Closet Cycle web prototype; Java API and relational database; clothing listings and exchange workflow; image-storage capability; campus community access; moderator time; clear safety and privacy guidance. Cloud infrastructure is planned, not deployed.
+VALUE PROPOSITIONS: Students can discover wearable pre-owned clothing near campus, list pieces they no longer use, request a direct swap or credit-balanced exchange, and confirm a handover together. Core browsing and exchanging remain free. Internal credits are prototype points only; they are not money.
+CUSTOMER RELATIONSHIPS: Self-service browsing/listing; clear exchange status; simple safety guidance; reporting and moderator review; optional Pro support/features only if validated. Do not claim identity verification, guaranteed safety, or existing customer service operations.
+CHANNELS: Proposed campus clubs and societies, opt-in clothing-swap events, student ambassadors, campus-approved social channels, and member referrals. These are go-to-market ideas, not launched channels.
+CUSTOMER SEGMENTS: First segment: students and campus community members who want affordable clothing variety and have wearable clothes they no longer need. Potential second payer: a campus office or sponsor supporting an event. Demand is unvalidated; label segments as hypotheses.
+REVENUE STREAMS: Clearly label “future experiments — no current revenue.” Hypothesis 1: optional Closet Cycle Pro at illustrative prices ₹49/month or ₹399/year, offering additional listing capacity, saved searches/match alerts, optional listing spotlight controls, and an exchange summary. Hypothesis 2: campus clothing-swap event sponsorship. Keep core exchanges free. The prototype displays a mock checkout with UPI, debit/credit cards, and net banking, but it does not collect payment data, connect to a gateway, or charge money. Payment methods are checkout choices, not separate revenue streams. Do not include selling credits, advertising claims, or a completed-exchange fee as approved revenue.
+COST STRUCTURE: Frontend/API maintenance; planned cloud hosting, database, and image storage; domain; moderation and member support; campus outreach/events; accessibility and security work; and future payment-provider transaction fees/taxes if live payments are approved. No deployed AWS costs are being claimed.
+
+VISUAL DIRECTION AND ACCURACY
+
+Use Closet Cycle’s sustainable-fashion editorial style: warm cream background, forest green headings, muted sage blocks, small terracotta accent, refined serif title paired with clean sans-serif body type, generous whitespace, crisp thin borders, and simple clothing/community icons. Keep all labels readable at presentation size. Fit the entire canvas on one page without shrinking text too far. Make the connectors and legend visually clear.
+Use no invented market-size figures, user counts, completed interviews, sales, customer testimonials, sponsors, partners, grants, environmental savings, or payment success. Distinguish implemented prototype features from proposed business hypotheses. Add a small footer: “Closet Cycle student prototype · proposed model for validation · no live payments or current revenue.” If the tool supports it, provide an editable vector or slide version and a high-resolution PNG export.

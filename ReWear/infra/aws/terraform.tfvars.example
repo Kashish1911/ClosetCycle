@@ -1,0 +1,16 @@
+# Copy this file to terraform.tfvars and replace every placeholder.
+# Never commit terraform.tfvars, state files, account credentials, or secrets.
+aws_region            = "ap-south-1"
+project_name          = "closet-cycle-sem5"
+api_hostname          = "api.example.edu"
+api_zone_id           = "Z0123456789EXAMPLE"
+certificate_arn       = "arn:aws:acm:ap-south-1:123456789012:certificate/REPLACE"
+api_image             = "123456789012.dkr.ecr.ap-south-1.amazonaws.com/closet-cycle-sem5:0.1.0"
+budget_email          = "team@example.edu"
+monthly_budget_usd    = 100
+db_instance_class     = "db.t4g.micro"
+api_desired_count     = 1
+api_cpu               = 256
+api_memory            = 512
+frontend_origin        = ""
+frontend_certificate_arn = ""
