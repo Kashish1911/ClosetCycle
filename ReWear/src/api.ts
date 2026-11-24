@@ -18,6 +18,7 @@ export type ApiReport = { id: number; reporterId: number; reporterName: string; 
 export type ApiProMembership = { active: boolean; plan: 'MONTHLY' | 'ANNUAL' | null; expiresAt: string | null }
 export type ApiProOrder = { orderId: string; keyId: string; amount: number; currency: string; plan: 'MONTHLY' | 'ANNUAL' }
 export type ApiProCode = { code: string; plan: 'MONTHLY' | 'ANNUAL'; expiresAt: string | null }
+export type ApiAdminUser = { id: number; displayName: string; email: string; area: string; creditBalance: number; role: 'MEMBER' | 'MODERATOR' | 'ADMIN' }
 
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
   if (!API_BASE) {
@@ -67,6 +68,9 @@ export const closetCycleApi = {
   createProOrder: (plan: 'MONTHLY' | 'ANNUAL') => api<ApiProOrder>('/api/pro/payments/orders', { method: 'POST', body: JSON.stringify({ plan }) }),
   verifyProPayment: (input: { orderId: string; paymentId: string; signature: string }) => api<ApiProMembership>('/api/pro/payments/verify', { method: 'POST', body: JSON.stringify(input) }),
   createAdminProCode: (input: { plan: 'MONTHLY' | 'ANNUAL'; expiresAt?: string }) => api<ApiProCode>('/api/admin/pro-codes', { method: 'POST', body: JSON.stringify(input) }),
+  adminUsers: () => api<ApiAdminUser[]>('/api/admin/users'),
+  updateAdminUserRole: (id: number, role: 'MEMBER' | 'MODERATOR' | 'ADMIN') =>
+    api<ApiAdminUser>(`/api/admin/users/${id}/role`, { method: 'PATCH', body: JSON.stringify({ role }) }),
 }
 
 export const fromApiItem = (item: ApiItem) => ({

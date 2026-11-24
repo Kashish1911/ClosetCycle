@@ -70,6 +70,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/pro/payments/webhook").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/items", "/api/items/*", "/api/media/*").permitAll()
                 .requestMatchers("/api/admin/pro-codes/**").hasRole("ADMIN")
+                .requestMatchers("/api/admin/users/**").hasRole("ADMIN")
                 .requestMatchers("/api/admin/**").hasAnyRole("MODERATOR", "ADMIN")
                 .anyRequest().authenticated())
             .oauth2ResourceServer(resource -> resource.jwt(jwt -> jwt.jwtAuthenticationConverter(converter)));

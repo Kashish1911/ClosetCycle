@@ -2,6 +2,7 @@ package com.closetcycle.api.config;
 
 import com.closetcycle.api.model.ClothingItem;
 import com.closetcycle.api.model.UserAccount;
+import com.closetcycle.api.model.UserRole;
 import com.closetcycle.api.repo.ClothingItemRepository;
 import com.closetcycle.api.repo.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -15,16 +16,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class DemoData {
     @Bean CommandLineRunner seedDemoData(UserRepository users, ClothingItemRepository items, PasswordEncoder passwordEncoder) {
         return args -> {
-            if (users.count() > 0) return;
-            var maya = users.save(new UserAccount("Maya Jensen", "maya@closetcycle.local", "North Campus"));
-            var amara = users.save(new UserAccount("Amara R.", "amara@closetcycle.local", "North Campus"));
-            var leo = users.save(new UserAccount("Leo T.", "leo@closetcycle.local", "Riverside"));
+            boolean firstRun = users.count() == 0;
+            var maya = users.findByEmail("maya@closetcycle.local")
+                    .orElseGet(() -> users.save(new UserAccount("Maya Jensen", "maya@closetcycle.local", "North Campus")));
+            var amara = users.findByEmail("amara@closetcycle.local")
+                    .orElseGet(() -> users.save(new UserAccount("Amara R.", "amara@closetcycle.local", "North Campus")));
+            var leo = users.findByEmail("leo@closetcycle.local")
+                    .orElseGet(() -> users.save(new UserAccount("Leo T.", "leo@closetcycle.local", "Riverside")));
+            var admin = users.findByEmail("admin@closetcycle.local")
+                    .orElseGet(() -> users.save(new UserAccount("Closet Cycle Admin", "admin@closetcycle.local", "Central Campus")));
             maya.setPasswordHash(passwordEncoder.encode("demo-password-1"));
             amara.setPasswordHash(passwordEncoder.encode("demo-password-2"));
             leo.setPasswordHash(passwordEncoder.encode("demo-password-3"));
+            admin.setPasswordHash(passwordEncoder.encode("admin-password"));
+            admin.setRole(UserRole.ADMIN);
             users.save(maya);
             users.save(amara);
             users.save(leo);
+            users.save(admin);
+            if (!firstRun) return;
             var rows = new Object[][]{
                     {"Vintage denim jacket", "A much-loved layering staple.", "Jackets", "M", "Very good", "Blue", "Unbranded", 120, "https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?auto=format&fit=crop&w=900&q=85", amara},
                     {"Terracotta floral dress", "Lightweight floral midi dress.", "Dresses", "S", "Like new", "Terracotta", "Unbranded", 140, "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=900&q=85", amara},

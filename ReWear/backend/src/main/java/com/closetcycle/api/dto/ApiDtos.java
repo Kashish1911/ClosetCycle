@@ -14,6 +14,12 @@ public final class ApiDtos {
     public record UserView(Long id, String displayName, String email, String area, int creditBalance) {
         public static UserView from(UserAccount u) { return new UserView(u.getId(), u.getDisplayName(), u.getEmail(), u.getArea(), u.getCreditBalance()); }
     }
+    public record AdminUserView(Long id, String displayName, String email, String area, int creditBalance, UserRole role) {
+        public static AdminUserView from(UserAccount u) {
+            return new AdminUserView(u.getId(), u.getDisplayName(), u.getEmail(), u.getArea(), u.getCreditBalance(), u.getRole());
+        }
+    }
+    public record UpdateUserRole(@NotNull UserRole role) { }
     public record UpdateProfile(@NotBlank @Size(max = 80) String displayName, @NotBlank @Size(max = 100) String area) { }
     public record CreateItem(@NotBlank @Size(max = 120) String title,
                              @Size(max = 1200) String description,
@@ -45,7 +51,7 @@ public final class ApiDtos {
         }
     }
     public record ProMembershipView(boolean active, ProPlan plan, java.time.Instant expiresAt) { }
-    public record CreateProCode(@NotNull ProPlan plan, @Future java.time.Instant expiresAt) { }
+    public record CreateProCode(@NotNull ProPlan plan, java.time.Instant expiresAt) { }
     public record ProCodeView(String code, ProPlan plan, java.time.Instant expiresAt) { }
     public record RedeemProCode(@NotBlank @Size(max = 80) String code) { }
     public record CreateProOrder(@NotNull ProPlan plan) { }
