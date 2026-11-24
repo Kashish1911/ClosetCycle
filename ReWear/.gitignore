@@ -25,6 +25,7 @@ terraform.tfvars
 /.tools/
 /.deck-build/
 /.codex-finalizer/
+.doc-build/
 
 # Platform-managed agentplat state, not project source. In the
 # client-initiated single-repo workspace layout (make's `Path: "."` spec) the
@@ -32,3 +33,4 @@ terraform.tfvars
 # beside it.
 /.plugins/
 /.opencode-skills/
+
